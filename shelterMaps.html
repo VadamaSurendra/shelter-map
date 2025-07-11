@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Women Safety Shelters Map</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  
+  <style>
+    #map {
+      height: 100vh;
+      width: 100%;
+    }
+    h2 {
+      text-align: center;
+      background: #f0f8ff;
+      padding: 10px;
+      font-family: Arial, sans-serif;
+    }
+  </style>
+</head>
+<body>
+
+<h2>Nearby Women Safety Shelters</h2>
+<div id="map"></div>
+
+<!-- Leaflet JS -->
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+<script>
+  // Initialize map
+  var map = L.map('map').setView([17.6868, 83.2185], 13); // Example center: Vizag
+
+  // Add OpenStreetMap tile layer (free!)
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; OpenStreetMap contributors'
+  }).addTo(map);
+
+  // Shelter locations
+  var shelters = [
+    { name: "Shelter 1 - Roadside", lat: 17.6900, lon: 83.2200 },
+    { name: "Shelter 2 - Near College", lat: 17.6800, lon: 83.2250 },
+    { name: "Shelter 3 - Village Entrance", lat: 17.6950, lon: 83.2150 }
+  ];
+
+  // Add markers
+  shelters.forEach(function(shelter) {
+    L.marker([shelter.lat, shelter.lon])
+      .addTo(map)
+      .bindPopup(`<b>${shelter.name}</b><br>Women Safety Shelter`)
+      .openPopup();
+  });
+</script>
+
+</body>
+</html>
