@@ -1,58 +1,42 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Women Safety Shelters Map</title>
+  <title>Women’s Safety Shelters Map</title>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
-  <!-- Leaflet CSS -->
-  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-  
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
   <style>
-    #map {
-      height: 100vh;
-      width: 100%;
-    }
-    h2 {
-      text-align: center;
-      background: #f0f8ff;
-      padding: 10px;
-      font-family: Arial, sans-serif;
-    }
+    #map { height: 100vh; width: 100%; }
   </style>
 </head>
 <body>
+  <div id="map"></div>
+  <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+  <script>
+    var map = L.map('map').setView([17.385044, 78.486671], 11); // Hyderabad center
 
-<h2>Nearby Women Safety Shelters</h2>
-<div id="map"></div>
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '© OpenStreetMap contributors'
+    }).addTo(map);
 
-<!-- Leaflet JS -->
-<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    // List of 10 shelters (randomly spaced for demo)
+    var shelters = [
+      [17.385044, 78.486671], // Main center
+      [17.408057, 78.486671],
+      [17.370000, 78.450000],
+      [17.355000, 78.520000],
+      [17.400000, 78.530000],
+      [17.395000, 78.470000],
+      [17.360000, 78.500000],
+      [17.385000, 78.445000],
+      [17.410000, 78.510000],
+      [17.375000, 78.460000]
+    ];
 
-<script>
-  // Initialize map
-  var map = L.map('map').setView([17.6868, 83.2185], 13); // Example center: Vizag
-
-  // Add OpenStreetMap tile layer (free!)
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '&copy; OpenStreetMap contributors'
-  }).addTo(map);
-
-  // Shelter locations
-  var shelters = [
-    { name: "Shelter 1 - Roadside", lat: 17.6900, lon: 83.2200 },
-    { name: "Shelter 2 - Near College", lat: 17.6800, lon: 83.2250 },
-    { name: "Shelter 3 - Village Entrance", lat: 17.6950, lon: 83.2150 }
-  ];
-
-  // Add markers
-  shelters.forEach(function(shelter) {
-    L.marker([shelter.lat, shelter.lon])
-      .addTo(map)
-      .bindPopup(`<b>${shelter.name}</b><br>Women Safety Shelter`)
-      .openPopup();
-  });
-</script>
-
+    shelters.forEach(function(coords, index) {
+      L.marker(coords).addTo(map)
+        .bindPopup("Shelter " + (index + 1));
+    });
+  </script>
 </body>
 </html>
